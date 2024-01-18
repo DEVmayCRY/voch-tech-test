@@ -15,7 +15,7 @@ class CargosFactory extends Factory
     public function definition()
     {
         return [
-            'cargo' => $this->faker->job,
+            'cargo' => $this->faker->unique()->job,
         ];
     }
 }

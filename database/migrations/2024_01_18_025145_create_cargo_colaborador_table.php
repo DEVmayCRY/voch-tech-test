@@ -19,7 +19,7 @@ class CreateCargoColaboradorTable extends Migration
             $table->foreign('cargo_id')->references('id')->on('cargos')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('colaborador_id');
             $table->foreign('colaborador_id')->references('id')->on('colaboradores')->onDelete('cascade')->onUpdate('cascade');
-            $table->integer('nota_desempenho');
+            $table->float('nota_desempenho', 8, 1);
             $table->timestamps();
         });
     }
