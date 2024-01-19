@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Unidade;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UnidadeController extends Controller
 {
@@ -14,7 +15,9 @@ class UnidadeController extends Controller
      */
     public function index()
     {
-        $unidades = Unidade::all();
+        $unidades = Unidade::select('unidades.id','unidades.nome_fantasia','unidades.razao_social', 'unidades.cnpj', DB::raw('COUNT(colaboradores.id) AS `total_colaboradores`'))
+        ->leftJoin('colaboradores', 'unidades.id','=','colaboradores.unidade_id')->
+        groupBy('unidades.id','unidades.nome_fantasia', 'unidades.razao_social', 'unidades.cnpj')->paginate(10);
         return view('unidade.index', compact('unidades'));
     }
 
@@ -44,7 +47,7 @@ class UnidadeController extends Controller
 
         Unidade::create($validatedData);
 
-        return redirect()->route('unidade.index');
+        return redirect()->to('/');
     }
 
     /**

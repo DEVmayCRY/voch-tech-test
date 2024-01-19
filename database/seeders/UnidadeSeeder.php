@@ -14,6 +14,6 @@ class UnidadeSeeder extends Seeder
      */
     public function run()
     {
-        Unidade::factory(10)->create();
+        Unidade::factory(150)->create();
     }
 }

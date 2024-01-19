@@ -19,7 +19,9 @@
     <div class="form-group">
         <label for="cnpj">CNPJ</label>
         <input type="text" class="form-control" name="cnpj" id="cnpj"
-            value="{{ old('cnpj', $unidade->cnpj ?? '') }}" required>
+               value="{{ old('cnpj', $unidade->cnpj ?? '') }}" required
+               maxlength="18"
+               oninput="this.value = this.value.replace(/[^0-9,.-]/g, '')">
     </div>
 
     <button type="submit" class="btn btn-primary">Salvar</button>
