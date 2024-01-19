@@ -14,7 +14,8 @@ class UnidadeController extends Controller
      */
     public function index()
     {
-        //
+        $unidades = Unidade::all();
+        return view('unidade.index', compact('unidades'));
     }
 
     /**
@@ -24,7 +25,7 @@ class UnidadeController extends Controller
      */
     public function create()
     {
-        //
+        return view('unidade.create');
     }
 
     /**
@@ -35,7 +36,15 @@ class UnidadeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nome_fantasia' => 'required',
+            'razao_social' => 'required',
+            'cnpj' => 'required',
+        ]);
+
+        Unidade::create($validatedData);
+
+        return redirect()->route('unidade.index');
     }
 
     /**
@@ -44,9 +53,9 @@ class UnidadeController extends Controller
      * @param  \App\Models\Unidade  $unidade
      * @return \Illuminate\Http\Response
      */
-    public function show(Unidade $unidade)
+    public function show($id)
     {
-        //
+        return $unidade = Unidade::findOrFail($id);
     }
 
     /**
@@ -55,9 +64,10 @@ class UnidadeController extends Controller
      * @param  \App\Models\Unidade  $unidade
      * @return \Illuminate\Http\Response
      */
-    public function edit(Unidade $unidade)
+    public function edit($id)
     {
-        //
+        $unidade = Unidade::findOrFail($id);
+        return view('unidade.edit', compact('unidade'));
     }
 
     /**
@@ -69,7 +79,15 @@ class UnidadeController extends Controller
      */
     public function update(Request $request, Unidade $unidade)
     {
-        //
+        $validatedData = $request->validate([
+            'nome_fantasia' => 'required',
+            'razao_social' => 'required',
+            'cnpj' => 'required',
+        ]);
+
+        $unidade->update($validatedData);
+
+        return redirect()->route('unidade.index');
     }
 
     /**
@@ -78,8 +96,11 @@ class UnidadeController extends Controller
      * @param  \App\Models\Unidade  $unidade
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Unidade $unidade)
+    public function destroy($id)
     {
-        //
+        $unidade = Unidade::findOrFail($id);
+        $unidade->delete();
+
+        return redirect()->route('unidade.index');
     }
 }
