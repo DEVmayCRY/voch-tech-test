@@ -14,6 +14,6 @@ class ColaboradoresSeeder extends Seeder
      */
     public function run()
     {
-        Colaboradores::factory(10)->create();
+        Colaboradores::factory(500)->create();
     }
 }
