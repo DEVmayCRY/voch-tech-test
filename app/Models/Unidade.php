@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Unidade extends Model
 {
+    protected $fillable = [
+        'nome_fantasia',
+        'razao_social',
+        'cnpj',
+    ];
     use HasFactory;
 }
