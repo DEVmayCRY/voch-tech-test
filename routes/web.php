@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UnidadeController;
+use App\Http\Controllers\ColaboradoresController;
+use App\Http\Controllers\CargoColaboradorController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::resource('unidade', UnidadeController::class);
+Route::resource('colaboradores', ColaboradoresController::class);
+Route::resource('cargoColaborador', CargoColaboradorController::class);
+Route::view('/', 'home');
