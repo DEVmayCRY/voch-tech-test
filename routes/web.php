@@ -19,5 +19,6 @@ use App\Http\Controllers\CargoColaboradorController;
 
 Route::resource('unidade', UnidadeController::class);
 Route::resource('colaboradores', ColaboradoresController::class);
+Route::get('/cargoColaborador/rank', [CargoColaboradorController::class,'rank'])->name('cargoColaborador.rank');
 Route::resource('cargoColaborador', CargoColaboradorController::class);
 Route::view('/', 'home');
