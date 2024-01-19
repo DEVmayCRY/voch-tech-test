@@ -17,12 +17,27 @@ class CargoColaboradorController extends Controller
      */
     public function index()
     {
-        $cargoColaborador = CargoColaborador::with('colaborador')->get();
+        $cargoColaborador = CargoColaborador::with('colaborador')->paginate(15);
         $cargos = Cargos::all();
         $colaboradores = Colaboradores::all();
         $unidade = Unidade::all();
 
         return view('cargoColaborador.index', compact('cargoColaborador', 'cargos', 'colaboradores', 'unidade'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function rank()
+    {
+        $cargoColaborador = CargoColaborador::with('colaborador')->orderByDesc('nota_desempenho')->paginate(15);
+        $cargos = Cargos::all();
+        $colaboradores = Colaboradores::all();
+        $unidade = Unidade::all();
+
+        return view('cargoColaborador.rank', compact('cargoColaborador', 'cargos', 'colaboradores', 'unidade'));
     }
 
     /**
@@ -32,15 +47,11 @@ class CargoColaboradorController extends Controller
      */
     public function create()
     {
-        $cargoColaborador = CargoColaborador::all();
         $cargos = Cargos::all();
-        $colaboradores = Colaboradores::all();
         $unidades = Unidade::all();
 
         return view('cargoColaborador.create')
-            ->with('cargoColaborador', $cargoColaborador)
             ->with('cargos', $cargos)
-            ->with('colaboradores', $colaboradores)
             ->with('unidades', $unidades);
     }
 
@@ -48,9 +59,11 @@ class CargoColaboradorController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Unidade  $unidade
+     * @param  \App\Models\Colaboradores  $colaboradores
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Colaboradores $colaboradores)
     {
 
         $cargo = $request->get('cargo_id');
@@ -77,44 +90,54 @@ class CargoColaboradorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Cargo_Colaborador  $cargo_Colaborador
+     * @param  \App\Models\CargoColaborador  $cargo_Colaborador
      * @return \Illuminate\Http\Response
      */
-    public function show(Cargo_Colaborador $cargo_Colaborador)
+    public function show(CargoColaborador $cargo_Colaborador)
     {
-        //
+        return 'hello';
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Cargo_Colaborador  $cargo_Colaborador
+     * @param  \App\Models\CargoColaborador  $cargo_Colaborador
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cargo_Colaborador $cargo_Colaborador)
+    public function edit($id)
     {
-        //
+        $cargoColaborador = CargoColaborador::with('colaborador')->findOrFail($id);
+        $cargos = Cargos::all();
+        $unidades = Unidade::all();
+
+        return view('cargoColaborador.edit', compact('cargoColaborador', 'cargos', 'unidades'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Cargo_Colaborador  $cargo_Colaborador
+     * @param  \App\Models\CargoColaborador  $cargo_Colaborador
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cargo_Colaborador $cargo_Colaborador)
+    public function update($id, Request $request)
     {
-        //
+        $cargoColaborador = CargoColaborador::findOrFail($id);
+
+        $cargoColaborador->fill($request->all());
+
+        $cargoColaborador->save();
+
+        return redirect()->to('/');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Cargo_Colaborador  $cargo_Colaborador
+     * @param  \App\Models\CargoColaborador  $cargo_Colaborador
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cargo_Colaborador $cargo_Colaborador)
+    public function destroy(CargoColaborador $cargo_Colaborador)
     {
         //
     }
