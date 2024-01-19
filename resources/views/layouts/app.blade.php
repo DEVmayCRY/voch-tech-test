@@ -13,8 +13,8 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand text-white">Navbar</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a href="/" class="navbar-brand text-white">Mateus de Oliveira Arantes</a>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
@@ -24,20 +24,30 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="{{ route('cargoColaborador.index') }}">Colaboradores</a>
-                        <a class="dropdown-item" href="{{ route('cargoColaborador.create') }}">Total de Colaboradores
+                        <a class="dropdown-item" href="{{ route('unidade.index') }}">Total de Colaboradores
                             por Unidade</a>
-                        <a class="dropdown-item" href="{{ route('cargoColaborador.create') }}">Ranking de
+                        <a class="dropdown-item" href="{{ route('cargoColaborador.rank') }}">Ranking de
                             Colaboradores</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Cadastrar
+                        Cadastro
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="{{ route('unidade.create') }}">Unidades</a>
-                        <a class="dropdown-item" href="{{ route('cargoColaborador.create') }}">Colaboradores</a>
+                        <a class="dropdown-item" href="{{ route('cargoColaborador.create') }}">Colaborador</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Contato
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="https://wa.me/5512935002177" target="_blank">WhatsApp</a>
+                        <a class="dropdown-item" href="https://www.linkedin.com/in/mateus-oliveira-arantes/" target="_blank">LinkedIn</a>
                     </div>
                 </li>
             </ul>
